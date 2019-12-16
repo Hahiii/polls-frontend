@@ -1,6 +1,5 @@
 import React from 'react';
-import logo from './logo.svg';
-import { Register } from './components/register';
+import { Register } from './pages/register';
 import './App.css';
 
 function App() {
