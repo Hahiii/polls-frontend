@@ -1,2 +1,13 @@
 @import "~bootstrap/scss/bootstrap";
 
+.hero {
+    background-size: cover;
+    background-repeat: no-repeat;
+    
+}
+
+
+.hero--register {
+    background-image:  radial-gradient( rgba(255, 0, 0, 0), black ), url(../images/felix-rostig-UmV2wr-Vbq8-unsplash.jpg);
+
+}
