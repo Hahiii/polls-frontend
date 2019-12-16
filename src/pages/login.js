@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom'
 
 function LogIn() {
     return (
@@ -15,6 +16,7 @@ function LogIn() {
                             <input type="password" className="form-control" id="userPassword" name="" />
                         </div>
                         <button type="submit" className="btn btn-primary">Submit</button>
+                        <Link to="/" className="btn btn-secondary">Sign Up</Link>
                     </form>
                 </div>
             </section>
