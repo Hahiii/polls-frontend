@@ -18,6 +18,7 @@ function App() {
           )}
         />
         <Route path="/login" component={LogIn} />
+        <Route path="/signup" component={SignUp} />
         <Route path="/polls/detail" component={PollsDetailView} />
       </BrowserRouter>
     </>
