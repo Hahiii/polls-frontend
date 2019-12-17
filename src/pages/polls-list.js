@@ -10,10 +10,10 @@ function PollsList() {
                         <div class="card-header text-center p-3">My Polls</div>
                         <div class="card-body">
                             <div class="list-group list-group-flush">
-                                <a href="#" class="list-group-item list-group-item-action">A simple primary list group item</a>
-                                <a href="#" class="list-group-item list-group-item-action">A simple secondary list group item</a>
-                                <a href="#" class="list-group-item list-group-item-action">A simple success list group item</a>
-                                <a href="#" class="list-group-item list-group-item-action disabled"><s>A simple danger list group item</s></a>
+                            <Link to="/polls/detail" class="list-group-item list-group-item-action">A simple primary list group item</Link>
+                                <Link to="/polls/detail" class="list-group-item list-group-item-action">A simple secondary list group item</Link>
+                                <Link to="/polls/detail" class="list-group-item list-group-item-action">A simple success list group item</Link>
+                                <Link to="/polls/detail" class="list-group-item list-group-item-action disabled"><s>A simple danger list group item</s></Link>
                             </div>
                         </div>
                     </div>
