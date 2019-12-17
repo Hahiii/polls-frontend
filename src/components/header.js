@@ -15,8 +15,8 @@ function Header() {
                         <Link className="nav-link" to="/">My Polls</Link>
                     </li>
                     <li className="nav-item">
-                        <Link className="nav-link" to="#">Creat Poll</Link>
                     </li>
+                        <Link className="nav-link" to="/polls/create">Create Poll</Link>
                 </ul>
             </div>
         </nav>
@@ -25,4 +25,4 @@ function Header() {
     );
 }
 
-export { Header }
+export { Header } 
