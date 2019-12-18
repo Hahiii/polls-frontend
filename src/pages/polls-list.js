@@ -38,7 +38,7 @@ function PollsList() {
                             <div className="card-body">
                                 <div className="list-group list-group-flush">
                                     {polls.length && polls.map(poll => 
-                                        <Link to={'/polls/detail/'+poll._id} className="list-group-item list-group-item-action" key={poll._id}>{poll.questions}</Link>
+                                        <Link to={'/polls/detail/?'+ poll._id} className="list-group-item list-group-item-action" key={poll._id}>{poll.questions}</Link>
                                     )}
                                 </div>
                             </div>
