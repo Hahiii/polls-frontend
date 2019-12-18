@@ -40,10 +40,10 @@ function PollsList() {
                 <div className="row">
                     <ul className="col-sm-12 col-md-8 my-5 list-group">
                         {polls.length && polls.map(poll =>
-                            <li className="list-group-item rounded-0 border-top-0 border-left-0 border-right-0 border-primary">
-                                <Link to={'/polls/detail/?' + poll._id} className="d-block text-dark text-decoration-none p-2" key={poll._id}>
+                            <li className="list-group-item rounded-0 border-top-0 border-left-0 border-right-0 border-primary" key={poll._id}>
+                                <Link to={'/polls/detail/?' + poll._id} className="d-block text-dark text-decoration-none p-2" >
                                     {poll.questions}
-                                    <span class="btn btn-sm btn-link text-decoration-none">
+                                    <span className="btn btn-sm btn-link text-decoration-none">
                                         &rarr;
                                     </span>
                                 </Link>
