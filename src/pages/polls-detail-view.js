@@ -1,5 +1,5 @@
 import React, { useRef } from 'react';
-import { Link } from 'react-router-dom'
+// import { Link } from 'react-router-dom'
 import { Header } from '../components/header';
 import { Footer } from '../components/footer';
 
@@ -53,7 +53,7 @@ function PollsDetailView() {
                                     </div>
                                 </div>
                                 <p className="card-text">This Poll is still Active</p>
-                                <a href="#" className="btn btn-primary">Edit Poll</a>
+                                <button className="btn btn-primary">Edit Poll</button>
                             </div>
                             <div className="card-footer text-muted">Last modified:  2 days ago</div>
                         </div>

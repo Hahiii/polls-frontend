@@ -1,5 +1,5 @@
 import React, { useRef } from 'react';
-import { Link } from 'react-router-dom'
+// import { Link } from 'react-router-dom'
 import { Header } from '../components/header';
 import { Footer } from '../components/footer';
 
@@ -24,18 +24,18 @@ function PollsDetailUserView() {
             <section className="container-fluid hero hero--register d-flex flex-grow-1 justify-content-center align-items-center">
                 <section className="container">
                     <div className="row justify-content-center align-items-center">
-                        <div class="card col-6 p-0">
-                            <div class="card-header p-4">Poll</div>
-                            <div class="card-body">
-                                <h5 class="card-title">How many day a week should we work.?</h5>
+                        <div className="card col-6 p-0">
+                            <div className="card-header p-4">Poll</div>
+                            <div className="card-body">
+                                <h5 className="card-title">How many day a week should we work.?</h5>
                                 <form className="col-md-12 bg-white p-0 rounded">
-                                    <div class="form-check p-3">
-                                        <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked />
-                                        <label class="form-check-label" for="exampleRadios1">We should have only 6 days work a week</label>
+                                    <div className="form-check p-3">
+                                        <input className="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked />
+                                        <label className="form-check-label" for="exampleRadios1">We should have only 6 days work a week</label>
                                     </div>
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2" />
-                                        <label class="form-check-label" for="exampleRadios2">We should have only 3 days work a week</label>
+                                    <div className="form-check">
+                                        <input className="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2" />
+                                        <label className="form-check-label" for="exampleRadios2">We should have only 3 days work a week</label>
                                     </div>
                                     <div className="form-group mt-4">
                                         <label for="validation">Email</label>
