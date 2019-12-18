@@ -2,11 +2,11 @@ import React from 'react';
 
 function Footer() {
     return (
-        <div className="card">
-            <div className="card-footer">
-    <small className="text-muted">&#169; N&B</small>
-            </div>
-        </div>
+        <footer className="container-fluid d-flex justify-content-end align-items-center bg-dark text-right py-2">
+            <p className="mb-0">
+                <small className="text-white">&#169; N&B</small>
+            </p>
+        </footer>
     );
 }
 

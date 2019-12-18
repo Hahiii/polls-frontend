@@ -9,7 +9,10 @@ function SignUp() {
             <Header />
             <section className="container-fluid hero hero--register d-flex flex-grow-1 justify-content-center align-items-center">
                 <section className="container">
-                    <div className="row justify-content-center align-items-center">
+                    <div className="row justify-content-end align-items-center">
+                        <h1 className="col-md-6 text-white mb-4">Sign up</h1>
+                    </div>
+                    <div className="row justify-content-end align-items-center">
                         <form className="col-md-6 bg-white p-5 rounded">
                             <div className="form-group">
                                 <label for="userFirstname">First Name</label>
@@ -27,8 +30,17 @@ function SignUp() {
                                 <label for="userPassword">Password</label>
                                 <input type="password" className="form-control" id="userPassword" name="password" />
                             </div>
-                            <button type="submit" className="btn btn-primary">Submit</button>
-                            <Link to="/login" className="btn btn-secondary">Log In</Link>
+
+
+                            <div className="d-flex">
+                                <p>
+                                    You already have an account?
+                                    <Link to="/login" className="mx-2">Log in</Link>
+                                </p>
+                            </div>
+                            <div className="d-flex justify-content-end">
+                                <button type="submit" className="btn btn-primary">Submit</button>
+                            </div>
                         </form>
                     </div>
                 </section>

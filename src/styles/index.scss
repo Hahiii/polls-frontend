@@ -3,13 +3,12 @@
 .hero {
     background-size: cover;
     background-repeat: no-repeat;
-    
+    background-position: left bottom;
 }
-
 
 .hero--register {
     background-image:  radial-gradient( rgba(255, 0, 0, 0), black ), url(../images/felix-rostig-UmV2wr-Vbq8-unsplash.jpg);
-
+    
 }
 
 #root {

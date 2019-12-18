@@ -26,26 +26,33 @@ function PollsList() {
         }
     }, [polls]);
     console.log(polls);
-    
+
     return (
         <>
             <Header />
-            <section className="container-fluid hero hero--register d-flex flex-grow-1 justify-content-center align-items-center">
+            <section className="container-fluid bg-primary">
                 <section className="container">
-                    <div className="row justify-content-center align-items-center">
-                        <div className="card col-6 p-0">
-                            <div className="card-header text-center p-5">My Polls</div>
-                            <div className="card-body">
-                                <div className="list-group list-group-flush">
-                                    {polls.length && polls.map(poll => 
-                                        <Link to={'/polls/detail/?'+ poll._id} className="list-group-item list-group-item-action" key={poll._id}>{poll.questions}</Link>
-                                    )}
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    <h1 className="display-2 text-white">My Polls</h1>
                 </section>
             </section>
+
+            <section className="container">
+                <div className="row">
+                    <ul className="col-sm-12 col-md-8 my-5 list-group">
+                        {polls.length && polls.map(poll =>
+                            <li className="list-group-item rounded-0 border-top-0 border-left-0 border-right-0 border-primary">
+                                <Link to={'/polls/detail/?' + poll._id} className="d-block text-dark text-decoration-none p-2" key={poll._id}>
+                                    {poll.questions}
+                                    <span class="btn btn-sm btn-link text-decoration-none">
+                                        &rarr;
+                                    </span>
+                                </Link>
+                            </li>
+                        )}
+                    </ul>
+                </div>
+            </section>
+
             <Footer />
         </>
     );
