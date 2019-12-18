@@ -1,30 +1,42 @@
 import React, { useRef, useEffect, useState } from 'react';
-// import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { Header } from '../components/header';
 import { Footer } from '../components/footer';
 
 function CreatePoll() {
-    const [anwserArr, setAnwserArr] = useState([]);
-    const [iteration, setIteration] = useState(0);
     const questionVal = useRef();
-    const anwserVal = useRef();
+    let [answerCount, setAnswerCount] = useState(2);
+
+    let answers = [
+        useRef(),
+        useRef(),
+        useRef(),
+        useRef(),
+        useRef()
+    ];
+
     const validationVal = useRef();
     const deadlineVal = useRef();
-    console.log(iteration)
-    let i = iteration;
-    let j = 0
-    const arr = [];
-
-
     const createPoll = (async () => {
         try {
+            const filteredAnswers = [];
+
+            answers.map((item) => {
+                if (item.current && item.current.value) {
+                    filteredAnswers.push({
+                        text: item.current.value,
+                        votes: 0
+                    });
+                }
+            });
+
             let dataObj = {
                 questions: questionVal.current.value,
-                anwser: anwserVal.current.value,
+                anwser: filteredAnswers,
                 validation: validationVal.current.value,
                 deadline: deadlineVal.current.value,
             }
-            // const body = JSON.stringify(dataObj)
+
             const response = await fetch('http://localhost:8080/api/poll/', {
                 method: 'POST', // *GET, POST, PUT, DELETE, etc.
                 mode: 'cors', // no-cors, *cors, same-origin
@@ -41,15 +53,7 @@ function CreatePoll() {
     });
 
     const addAnwser = _ => {
-        i++
-        if (i <= 10) {
-            setIteration(i)
-            while (j < i) {
-                arr.push(j)
-                j++;
-            }
-            setAnwserArr(arr);
-        }
+        setAnswerCount(answerCount + 1);
     }
 
     return (
@@ -62,9 +66,9 @@ function CreatePoll() {
                 </section>
             </section>
 
-            <section className="container">
+            <section className="container bg-white h-100">
                 <div className="row">
-                    <form className="col-md-6 bg-white p-5 rounded">
+                    <form className="col-md-6 p-5">
                         <div className="form-group">
                             <label htmlFor="questions">Question</label>
                             <input type="text" className="form-control" id="questions" name="questions" ref={questionVal} />
@@ -73,22 +77,22 @@ function CreatePoll() {
                         <fieldset className="form-group">
                             <label htmlFor="anwser">Answers <p className="d-inline small">(Add at least 2 answers)</p></label>
 
-                            <div className="form-group">
-                                <label htmlFor="anwser">1. Answer</label>
-                                <input type="text" className="form-control" id="anwser" name="anwser" ref={anwserVal} />
-                            </div>
+                            {
+                                answers.map((item, i) => {
 
-                            <div className="form-group">
-                                <label htmlFor="anwser">2. Answer</label>
-                                <input type="text" className="form-control" id="anwser" name="anwser" ref={anwserVal} />
-                            </div>
+                                    if (i < answerCount) {
+                                        return (
+                                            <div className="form-group" key={i} >
+                                                <label htmlFor="anwser">{i + 1}. Answer</label>
+                                                <input type="text" className="form-control" id="anwser" name="anwser" ref={answers[i]} />
+                                            </div>
+                                        )
+                                    } else {
+                                        return (null);
+                                    }
 
-                            {anwserArr.length ? anwserArr.map((anwser, i) => (
-                                <div className="form-group">
-                                    <label htmlFor="anwser">{i + 3}. Answer</label>
-                                    <input type="text" className="form-control" id="anwser" name="anwser" ref={anwserVal} key={anwser} />
-                                </div>
-                            )) : ''}
+                                })
+                            }
 
                             <button type="button" className="btn btn-outline-primary" onClick={(e) => {
                                 e.preventDefault();
@@ -108,11 +112,8 @@ function CreatePoll() {
                         </div>
 
                         <div className="d-flex justify-content-end">
-                            <button type="submit" className="btn btn-outline-secondary mr-3" onClick={(e) => {
-                                e.preventDefault();
-                                createPoll(e);
-                            }}>Cancel</button>
-                            <button type="submit" className="btn btn-primary" onClick={(e) => {
+                            <Link to="/" className="btn btn-outline-secondary mr-3">Cancel</Link>
+                            <button type="button" className="btn btn-primary" onClick={(e) => {
                                 e.preventDefault();
                                 createPoll(e);
                             }}>Submit</button>
