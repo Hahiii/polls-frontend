@@ -2,25 +2,19 @@ import React from 'react';
 import { Link } from 'react-router-dom'
 import { ReactComponent as Logo } from '../images/poll-logo.svg'
 function Header({ admin, login, user, list, create }) {
-
+    let clicked = false
     const logOut = _ => {
         localStorage.removeItem("id");
         localStorage.removeItem("token");
         window.location.replace("/")
         return null;
     }
-
-
+    
     return (
         <header>
-            <nav className="navbar navbar-expand-lg navbar-dark bg-primary py-3">
+            <nav className="navbar navbar-expand-lg justify-content-between navbar-dark bg-primary py-3">
                 <Link className="navbar-brand" to="/">{<Logo className="text-light" />}</Link>
-
-                <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                    <span className="navbar-toggler-icon"></span>
-                </button>
-
-                <div className="collapse navbar-collapse" id="navbarNav">
+                <div className= "collapse show" id="navbarNav">
                     <ul className="navbar-nav ml-auto">
                         {admin ? <>
                             {!list &&
