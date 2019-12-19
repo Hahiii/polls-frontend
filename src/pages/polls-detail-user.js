@@ -1,13 +1,65 @@
-import React, { useRef } from 'react';
+import React, { useRef, useEffect, useState } from 'react';
 // import { Link } from 'react-router-dom'
 import { Header } from '../components/header';
 import { Footer } from '../components/footer';
 
 function PollsDetailUserView() {
-   
+    const [optionVal, setOptionVal] = useState('');
+    const [pollDetail, setPollDetail] = useState(false);
+    const email = useRef();
+    const validation = useRef();
+    const id = window.location.search.slice(1);
+
+    useEffect(() => {
+        if (!pollDetail) {
+            (async () => {
+                try {
+                    const response = await fetch('http://localhost:8080/api/poll/user/' + id, {
+                        method: 'GET', // *GET, POST, PUT, DELETE, etc.
+                        mode: 'cors', // no-cors, *cors, same-origin
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                    });
+                    const { data } = await response.json();
+                    setPollDetail(data);
+                } catch (error) {
+                    console.error('Error:', error);
+                }
+            })();
+        }
+    }, [pollDetail]);
+
+    const submitVote = async _ => {
+        const voteObj = {
+            text: optionVal,
+            email: email.current.value,
+            validation: validation.current.value
+        }
+
+        try {
+            const response = await fetch('http://localhost:8080/api/poll/vote/' + id, {
+                method: 'POST', // *GET, POST, PUT, DELETE, etc.
+                mode: 'cors', // no-cors, *cors, same-origin
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(voteObj)
+            });
+
+            const { data } = await response.json()
+            console.log(data)
+        } catch (error) {
+
+            console.error('Error:', error);
+        }
+    }
+
+
+
     return (
         <>
-            <Header 
+            <Header
                 user={true}
             />
 
@@ -18,31 +70,37 @@ function PollsDetailUserView() {
             </section>
             <section className="container bg-white h-100">
                 <div className="row">
-                    <div className="col-md-6 p-5">
-                        <h2 className="">How many day a week should we work.?</h2>
-                        <form className="">
-                            <div className="form-check p-3">
-                                <input className="form-check-input" type="radio" name="answers" id="exampleRadios1" value="option1" defaultChecked />
-                                <label className="form-check-label" htmlFor="exampleRadios1">We should have only 6 days work a week</label>
-                            </div>
-                            <div className="form-check p-3">
-                                <input className="form-check-input" type="radio" name="answers" id="exampleRadios2" value="option2" />
-                                <label className="form-check-label" htmlFor="exampleRadios2">We should have only 3 days work a week</label>
-                            </div>
-                            <div className="form-group mt-4">
-                                <label htmlFor="validation">Email</label>
-                                <input type="email" className="form-control" id="validation" name="validation" placeholder="example@example.com" />
-                            </div>
-                            <div className="form-group mt-4">
-                                <label htmlFor="validation">Enter Validation Key</label>
-                                <input type="text" className="form-control" id="validation" name="validation" placeholder="Secret Key" />
-                            </div>
-                            <p className="">Poll closes in: (time)</p>
-                            <div className="d-flex justify-content-end">
-                                <button type="submit" className="btn btn-primary">Submit Vote</button>
-                            </div>
-                        </form>
-                    </div>
+                    {pollDetail && <>
+                        <div className="col-md-6 p-5">
+                            <h2 className="">{pollDetail.questions}</h2>
+                            <form className="">
+                                {pollDetail.anwser.map((anwser, i) =>
+                                    <div className="form-check p-3" key={i}>
+                                        <input className="form-check-input" type="radio" name="answers" id="exampleRadios1" value={anwser.text} onChange={(e) => setOptionVal(e.target.value)} />
+                                        <label className="form-check-label" htmlFor="exampleRadios1">{anwser.text}</label>
+                                    </div>
+                                )}
+                                <div className="form-group mt-4">
+                                    <label htmlFor="validation">Email</label>
+                                    <input type="email" className="form-control" id="validation" name="validation" placeholder="example@example.com" ref={email} />
+                                </div>
+                                <div className="form-group mt-4">
+                                    <label htmlFor="validation">Enter Validation Key</label>
+                                    <input type="text" className="form-control" id="validation" name="validation" placeholder="Secret Key" ref={validation} />
+                                </div>
+                                <p className="">{new Date().toDateString() === new Date(pollDetail.deadline).toDateString() ? `Poll is closed.` : `Poll closes on: ${new Date(pollDetail.deadline).toDateString()}`}</p>
+                                {new Date().toDateString() === new Date(pollDetail.deadline).toDateString() ? `` :
+                                    <div className="d-flex justify-content-end">
+                                        <button type="button" className="btn btn-primary" onClick={(e) => {
+                                            e.preventDefault();
+                                            submitVote();
+                                        }}>Submit Vote</button>
+                                    </div>
+                                }
+
+                            </form>
+                        </div>
+                    </>}
                 </div>
             </section>
 
