@@ -3,8 +3,9 @@ import { Link } from 'react-router-dom'
 import { Header } from '../components/header';
 import { Footer } from '../components/footer';
 
-function CreatePoll({ token }) {
+function CreatePoll({ token, loggedIn }) {
     token = token.slice(1, token.length - 1);
+    loggedIn = loggedIn.slice(1, loggedIn.length - 1);
     const questionVal = useRef();
     let [answerCount, setAnswerCount] = useState(2);
     let [poll, setPoll] = useState(false);
@@ -27,6 +28,7 @@ function CreatePoll({ token }) {
 
     const validationVal = useRef();
     const deadlineVal = useRef();
+
     const createPoll = (async () => {
         try {
             const filteredAnswers = [];
@@ -47,7 +49,7 @@ function CreatePoll({ token }) {
                 deadline: deadlineVal.current.value,
             }
 
-            const response = await fetch('http://localhost:8080/api/poll/', {
+            const response = await fetch('http://localhost:8080/api/poll/' + loggedIn, {
                 method: 'POST', // *GET, POST, PUT, DELETE, etc.
                 mode: 'cors', // no-cors, *cors, same-origin
                 headers: {
@@ -57,7 +59,7 @@ function CreatePoll({ token }) {
                 body: JSON.stringify(dataObj)
             });
             const { data } = await response.json()
-            console.log(data)
+            console.log(".......",data)
             setPoll(data)
         } catch (error) {
 
@@ -131,7 +133,7 @@ function CreatePoll({ token }) {
                                     <Link to="/" className="btn btn-outline-secondary mr-3">Cancel</Link>
                                     <button type="button" className="btn btn-primary" onClick={(e) => {
                                         e.preventDefault();
-                                        createPoll(e);
+                                        createPoll();
                                     }}>Submit</button>
                                 </div>
                             </form>
@@ -145,14 +147,14 @@ function CreatePoll({ token }) {
                                     <h5 className="modal-title">Poll sucssesful created.</h5>
                                     <button type="button" className="close">
                                         <span onClick={(e) => {
-                                        e.preventDefault();
-                                        window.location.replace("/");
-                                    }}>&times;</span>
+                                            e.preventDefault();
+                                            window.location.replace("/");
+                                        }}>&times;</span>
                                     </button>
                                 </div>
                                 <div className="modal-body">
                                     <p>Share Link and Validation to voter to be able to vote</p>
-                                    <p>Poll Link: <Link to={`/polls/user/detail?${poll.id}`}>localhost:3000/polls/user/detail/{poll.id}</Link></p>
+                                    <p>Poll Link: <Link to={`/polls/user/detail?${poll._id}`}>localhost:3000/polls/user/detail/{poll._id}</Link></p>
                                     <p>Validation: {poll.validation}</p>
                                 </div>
                                 <div className="modal-footer">
@@ -164,9 +166,6 @@ function CreatePoll({ token }) {
                             </div>
                         </div>
                     </div>
-
-
-
                 </>
             }
 

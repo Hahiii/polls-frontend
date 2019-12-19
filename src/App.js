@@ -10,7 +10,8 @@ import './App.css';
 
 function App() {
   const token = localStorage.getItem('token');
-  
+  const userId = localStorage.getItem('id');
+
   return (
     <>
       <BrowserRouter>
@@ -20,18 +21,24 @@ function App() {
           render={() => (
             <PollsList
               token={token}
+              loggedIn={userId}
             />
           )}
         />
         <Route path="/login" render={() => (
-          <LogIn />
+          <LogIn
+            loggedIn={userId}
+          />
         )} />
         <Route path="/signup" render={() => (
-          <SignUp />
+          <SignUp
+            loggedIn={userId}
+          />
         )} />
         <Route path="/polls/create" render={() => (
           <CreatePoll
             token={token}
+            loggedIn={userId}
           />
         )} />
         <Route path="/polls/detail" render={() => (
@@ -40,7 +47,7 @@ function App() {
           />
         )} />
         <Route path="/polls/user/detail" render={() => (
-          <PollsDetailUserView/>
+          <PollsDetailUserView />
         )} />
       </BrowserRouter>
     </>

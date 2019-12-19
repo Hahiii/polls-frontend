@@ -3,13 +3,16 @@ import { Link } from 'react-router-dom'
 import { Header } from '../components/header';
 import { Footer } from '../components/footer';
 
-function SignUp() {
+function SignUp({ loggedIn }) {
     const firstname = useRef();
     const lastname = useRef();
     const email = useRef();
     const password = useRef();
     const submitRegistration = async _ => {
-
+        if (loggedIn) {
+            window.location.replace("/")
+            return;
+        }
         const dataObj = {
             firstname: firstname.current.value,
             lastname: lastname.current.value,
@@ -27,10 +30,13 @@ function SignUp() {
                 body: JSON.stringify(dataObj)
             });
             const { data } = await response.json();
-
+            console.log(data)
             /* Save Token on local Storage */
             localStorage.setItem('token', JSON.stringify(data.token));
-            window.location.replace('/');
+            localStorage.setItem('id', JSON.stringify(data.userId));
+            if (localStorage.getItem('id')) {
+                window.location.replace('/');
+            }
         } catch (error) {
             console.error('Error:', error);
         }
@@ -39,7 +45,7 @@ function SignUp() {
 
     return (
         <>
-            <Header 
+            <Header
                 login={false}
             />
             <section className="container-fluid hero hero--register d-flex flex-grow-1 justify-content-center align-items-center">

@@ -3,7 +3,12 @@ import { Link } from 'react-router-dom'
 import { Header } from '../components/header';
 import { Footer } from '../components/footer';
 
-function LogIn() {
+function LogIn({ loggedIn }) {
+    if (loggedIn) {
+        window.location.replace("/")
+        return;
+    }
+
     return (
         <>
             <Header
