@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useRef } from 'react';
 import { Link } from 'react-router-dom'
 import { Header } from '../components/header';
 import { Footer } from '../components/footer';
@@ -8,11 +8,12 @@ function SignUp({ loggedIn }) {
     const lastname = useRef();
     const email = useRef();
     const password = useRef();
+    if (loggedIn) {
+        window.location.replace("/")
+        return null;
+    }
     const submitRegistration = async _ => {
-        if (loggedIn) {
-            window.location.replace("/")
-            return;
-        }
+
         const dataObj = {
             firstname: firstname.current.value,
             lastname: lastname.current.value,

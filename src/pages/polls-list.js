@@ -2,10 +2,12 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom'
 import { Header } from '../components/header';
 import { Footer } from '../components/footer';
-
+import { ReactComponent as EmptyState } from '../images/empty-state.svg'
 function PollsList({ token, loggedIn }) {
-    loggedIn = loggedIn.slice(1, loggedIn.length - 1);
-    token = token.slice(1, token.length - 1);
+    if (loggedIn) {
+        loggedIn = loggedIn.slice(1, loggedIn.length - 1);
+        token = token.slice(1, token.length - 1);
+    }
     const [polls, setPolls] = useState(false);
 
     useEffect(() => {
@@ -71,17 +73,26 @@ function PollsList({ token, loggedIn }) {
 
                 <section className="container h-100">
                     <div className="row">
-                        <ul className="col-sm-12 col-md-8 my-5 list-group">
-                            {polls.length && polls.map(poll =>
-                                <li className="list-group-item d-flex justify-content-between align-items-center rounded-0 border-top-0 border-left-0 border-right-0 border-primary" key={poll._id}>
-                                    <Link to={'/polls/detail/?' + poll._id} className="d-block text-dark text-decoration-none p-2" >
-                                        {poll.questions}
-                                        <span className="btn btn-sm btn-link text-decoration-none">&rarr;</span>
-                                    </Link>
-                                    <span className="btn btn-sm btn-link text-decoration-none" onClick={() => deletePollById(poll._id)}>&#10008;</span>
-                                </li>
-                            )}
-                        </ul>
+                        {polls.length ?
+                            <ul className="col-sm-12 col-md-8 my-5 list-group">
+                                {polls.length && polls.map(poll =>
+                                    <li className="list-group-item d-flex justify-content-between align-items-center rounded-0 border-top-0 border-left-0 border-right-0 border-primary" key={poll._id}>
+                                        <Link to={'/polls/detail/?' + poll._id} className="d-block text-dark text-decoration-none p-2" >
+                                            {poll.questions}
+                                            <span className="btn btn-sm btn-link text-decoration-none">&rarr;</span>
+                                        </Link>
+                                        <span className="btn btn-sm btn-link text-decoration-none" onClick={() => deletePollById(poll._id)}>&#10008;</span>
+                                    </li>
+                                )}
+                            </ul>
+                            :
+                            <div className="col-12">
+                                <div className="row justify-content-center">
+                                    <p className="col-8 text-center p-3">No polls yet :( <Link to="/polls/create" className="m-0 p-3">Create a poll</Link></p>
+                                    <EmptyState className="col-8 h-50" />
+                                </div>
+                            </div>
+                        }
                     </div>
                 </section>
 
