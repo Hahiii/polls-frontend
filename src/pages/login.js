@@ -6,7 +6,9 @@ import { Footer } from '../components/footer';
 function LogIn() {
     return (
         <>
-            <Header />
+            <Header
+                login={true}
+            />
             <section className="container-fluid hero hero--register d-flex flex-grow-1 justify-content-center align-items-center">
                 <section className="container">
                     <div className="row justify-content-end align-items-center">
@@ -15,11 +17,11 @@ function LogIn() {
                     <div className="row justify-content-end align-items-center">
                         <form className="col-md-6 bg-white p-5 rounded">
                             <div className="form-group">
-                                <label for="userEmail">Email address</label>
+                                <label htmlFor="userEmail">Email address</label>
                                 <input type="email" className="form-control" id="userEmail" name="" />
                             </div>
                             <div className="form-group">
-                                <label for="userPassword">Password</label>
+                                <label htmlFor="userPassword">Password</label>
                                 <input type="password" className="form-control" id="userPassword" name="" />
                             </div>
                             <div className="d-flex">

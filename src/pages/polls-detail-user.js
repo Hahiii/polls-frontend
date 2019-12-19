@@ -4,43 +4,28 @@ import { Header } from '../components/header';
 import { Footer } from '../components/footer';
 
 function PollsDetailUserView() {
-    const headingOne = useRef();
-    const headingTwo = useRef();
-
-
-    const showAnwsersVote = param => {
-        if (param.current.className.indexOf("show") >= 0) {
-            param.current.classList.remove("show");
-            return;
-        }
-        param.current.classList.add("show");
-    }
-
-
-
+   
     return (
         <>
-            <Header />
+            <Header 
+                user={true}
+            />
 
             <section className="container-fluid bg-primary">
                 <section className="container">
                     <h1 className="display-2 text-white">Vote</h1>
                 </section>
             </section>
-
-
             <section className="container bg-white h-100">
                 <div className="row">
                     <div className="col-md-6 p-5">
-
-
                         <h2 className="">How many day a week should we work.?</h2>
                         <form className="">
                             <div className="form-check p-3">
-                                <input className="form-check-input" type="radio" name="answers" id="exampleRadios1" value="option1" checked />
+                                <input className="form-check-input" type="radio" name="answers" id="exampleRadios1" value="option1" defaultChecked />
                                 <label className="form-check-label" htmlFor="exampleRadios1">We should have only 6 days work a week</label>
                             </div>
-                            <div className="form-check">
+                            <div className="form-check p-3">
                                 <input className="form-check-input" type="radio" name="answers" id="exampleRadios2" value="option2" />
                                 <label className="form-check-label" htmlFor="exampleRadios2">We should have only 3 days work a week</label>
                             </div>
@@ -57,8 +42,6 @@ function PollsDetailUserView() {
                                 <button type="submit" className="btn btn-primary">Submit Vote</button>
                             </div>
                         </form>
-
-
                     </div>
                 </div>
             </section>
