@@ -1,4 +1,10 @@
 @import "~bootstrap/scss/bootstrap";
+#root {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    width: 100vw;
+}
 
 .hero {
     background-size: cover;
@@ -9,13 +15,6 @@
 .hero--register {
     background-image:  radial-gradient( rgba(255, 0, 0, 0), black ), url(../images/felix-rostig-UmV2wr-Vbq8-unsplash.jpg);
     
-}
-
-#root {
-    display: flex;
-    flex-direction: column;
-    height: 100vh;
-    width: 100vw;
 }
 
 .spinner {
