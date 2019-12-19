@@ -91,7 +91,6 @@ function CreatePoll({ token }) {
 
                             {
                                 answers.map((item, i) => {
-
                                     if (i < answerCount) {
                                         return (
                                             <div className="form-group" key={i} >
@@ -102,7 +101,6 @@ function CreatePoll({ token }) {
                                     } else {
                                         return (null);
                                     }
-
                                 })
                             }
 
