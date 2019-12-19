@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom'
 
-function Header() {
+function Header({ admin, login, user }) {
     return (
         <header>
             <nav className="navbar navbar-expand-lg navbar-dark bg-primary py-3">
@@ -13,12 +13,23 @@ function Header() {
 
                 <div className="collapse navbar-collapse" id="navbarNav">
                     <ul className="navbar-nav ml-auto">
-                        <li className="nav-item">
-                            <Link className="nav-link" to="/">My Polls</Link>
-                        </li>
-                        <li className="nav-item">
-                        </li>
-                        <Link className="nav-link" to="/polls/create">Create Poll</Link>
+                        {admin ? <>
+                            <li className="nav-item">
+                                <Link className="nav-link" to="/">My Polls</Link>
+                            </li>
+                            <li className="nav-item">
+                                <Link className="nav-link" to="/polls/create">Create Poll</Link>
+                            </li>
+                        </>
+                            :
+                            <>
+                                {!user &&
+                                    <li className="nav-item">
+                                        <Link className="nav-link" to={login ? '/signup' : '/login'}>{login ? 'Sign Up' : 'Log In'}</Link>
+                                    </li>
+                                }
+                            </>
+                        }
                     </ul>
                 </div>
             </nav>
