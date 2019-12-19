@@ -11,8 +11,8 @@ function PollsList({ token }) {
         if (!token) {
             window.location.replace('/signup')
             return;
-          }
-          
+        }
+
         if (!polls) {
             (async () => {
                 try {
@@ -36,33 +36,36 @@ function PollsList({ token }) {
 
     return (
         <>
-            <Header 
-                admin={token ? true : false}
-            />
-            <section className="container-fluid bg-primary">
-                <section className="container">
-                    <h1 className="display-2 text-white">My Polls</h1>
+            {polls ?  <>
+                <Header
+                    list={true}
+                    admin={token ? true : false}
+                />
+                <section className="container-fluid bg-primary">
+                    <section className="container">
+                        <h1 className="display-2 text-white">My Polls</h1>
+                    </section>
                 </section>
-            </section>
 
-            <section className="container">
-                <div className="row">
-                    <ul className="col-sm-12 col-md-8 my-5 list-group">
-                        {polls.length && polls.map(poll =>
-                            <li className="list-group-item rounded-0 border-top-0 border-left-0 border-right-0 border-primary" key={poll._id}>
-                                <Link to={'/polls/detail/?' + poll._id} className="d-block text-dark text-decoration-none p-2" >
-                                    {poll.questions}
-                                    <span className="btn btn-sm btn-link text-decoration-none">
-                                        &rarr;
+                <section className="container">
+                    <div className="row">
+                        <ul className="col-sm-12 col-md-8 my-5 list-group">
+                            {polls.length && polls.map(poll =>
+                                <li className="list-group-item rounded-0 border-top-0 border-left-0 border-right-0 border-primary" key={poll._id}>
+                                    <Link to={'/polls/detail/?' + poll._id} className="d-block text-dark text-decoration-none p-2" >
+                                        {poll.questions}
+                                        <span className="btn btn-sm btn-link text-decoration-none">
+                                            &rarr;
                                     </span>
-                                </Link>
-                            </li>
-                        )}
-                    </ul>
-                </div>
-            </section>
+                                    </Link>
+                                </li>
+                            )}
+                        </ul>
+                    </div>
+                </section>
 
-            <Footer />
+                <Footer />
+                </> : <div className="d-fex vh-100 justify-content-center align-item-center spinner"></div>}
         </>
     );
 }
