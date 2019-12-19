@@ -4,7 +4,6 @@ import { Header } from '../components/header';
 import { Footer } from '../components/footer';
 
 function SignUp() {
-    const [polls, setPolls] = useState(false);
     const firstname = useRef();
     const lastname = useRef();
     const email = useRef();
@@ -29,10 +28,9 @@ function SignUp() {
             });
             const { data } = await response.json();
 
-            // save token somewhere
-
-            console.log(data);
-
+            /* Save Token on local Storage */
+            localStorage.setItem('token', JSON.stringify(data.token));
+            window.location.replace('/');
         } catch (error) {
             console.error('Error:', error);
         }
@@ -41,7 +39,9 @@ function SignUp() {
 
     return (
         <>
-            <Header />
+            <Header 
+                login={false}
+            />
             <section className="container-fluid hero hero--register d-flex flex-grow-1 justify-content-center align-items-center">
                 <section className="container">
                     <div className="row justify-content-end align-items-center">

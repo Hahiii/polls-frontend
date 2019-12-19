@@ -3,14 +3,15 @@ import React, { useRef, useEffect, useState } from 'react';
 import { Header } from '../components/header';
 import { Footer } from '../components/footer';
 
-function PollsDetailView() {
-    const headingOne = useRef();
-    const headingTwo = useRef();
-
+function PollsDetailView({ token }) {
     const [pollDetail, setPollDetail] = useState(false);
     const id = window.location.search.slice(1);
     useEffect(() => {
-
+        if (!token) {
+            window.location.replace('/signup');
+            return;
+        }
+        token = token.slice(1, token.length - 1);
         if (!pollDetail) {
             (async () => {
                 try {
@@ -19,6 +20,7 @@ function PollsDetailView() {
                         mode: 'cors', // no-cors, *cors, same-origin
                         headers: {
                             'Content-Type': 'application/json',
+                            'auth': `Bearer ${token}`
                         },
                     });
                     const { data } = await response.json();
@@ -38,11 +40,11 @@ function PollsDetailView() {
         param.current.classList.add("show");
     }
 
-
-
     return (
         <>
-            <Header />
+            <Header
+                admin={token ? true : false}
+            />
             <section className="container-fluid bg-primary">
                 <section className="container">
                     <h1 className="display-2 text-white">{pollDetail.questions}</h1>
@@ -65,22 +67,7 @@ function PollsDetailView() {
                                             </div>
                                         </div>
                                     </>))}
-                                {/* <div className="card border-0 m-2">
-                                            <div className="card-header" id="headingTwo">
-                                                <h2 className="mb-0">
-                                                    <button className="btn btn-link" type="button" aria-expanded="false"
-                                                        onClick={(e) => showAnwsersVote(headingTwo)}>Anwser B</button>
-                                                </h2>
-                                            </div>
-                                            <div id="collapseTwo" className="collapse" ref={headingTwo}>
-                                                <div className="card-body">28 Votes</div>
-                                            </div>
-                                        </div> */}
                             </div>
-
-                            {/* Enable edit button */}
-                            {/* <button className="btn btn-primary">Edit Poll</button> */}
-
                         </>}
                         <div className="d-flex justify-content-end align-items-center">
                             <p className="mr-3">This Poll is still Active</p>

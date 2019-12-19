@@ -9,6 +9,8 @@ import { CreatePoll } from './pages/create-poll';
 import './App.css';
 
 function App() {
+  const token = localStorage.getItem('token');
+  
   return (
     <>
       <BrowserRouter>
@@ -16,14 +18,30 @@ function App() {
           exact
           path="/"
           render={() => (
-            <PollsList />
+            <PollsList
+              token={token}
+            />
           )}
         />
-        <Route path="/login" component={LogIn} />
-        <Route path="/signup" component={SignUp} />
-        <Route path="/polls/create" component={CreatePoll} />
-        <Route path="/polls/detail" component={PollsDetailView} />
-        <Route path="/polls/user/detail" component={PollsDetailUserView} />
+        <Route path="/login" render={() => (
+          <LogIn />
+        )} />
+        <Route path="/signup" render={() => (
+          <SignUp />
+        )} />
+        <Route path="/polls/create" render={() => (
+          <CreatePoll
+            token={token}
+          />
+        )} />
+        <Route path="/polls/detail" render={() => (
+          <PollsDetailView
+            token={token}
+          />
+        )} />
+        <Route path="/polls/user/detail" render={() => (
+          <PollsDetailUserView/>
+        )} />
       </BrowserRouter>
     </>
   );

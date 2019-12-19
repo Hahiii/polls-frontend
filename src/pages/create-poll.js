@@ -3,9 +3,17 @@ import { Link } from 'react-router-dom'
 import { Header } from '../components/header';
 import { Footer } from '../components/footer';
 
-function CreatePoll() {
+function CreatePoll({ token }) {
+    token = token.slice(1, token.length - 1);
     const questionVal = useRef();
     let [answerCount, setAnswerCount] = useState(2);
+
+    useEffect(() => {
+        if (!token) {
+            window.location.replace('/signup')
+            return;
+        }
+    }, []);
 
     let answers = [
         useRef(),
@@ -42,12 +50,14 @@ function CreatePoll() {
                 mode: 'cors', // no-cors, *cors, same-origin
                 headers: {
                     'Content-Type': 'application/json',
+                    'auth': `Bearer ${token}`
                 },
                 body: JSON.stringify(dataObj)
             });
             const { data } = await response.json()
             console.log(data)
         } catch (error) {
+
             console.error('Error:', error);
         }
     });
@@ -58,7 +68,9 @@ function CreatePoll() {
 
     return (
         <>
-            <Header />
+            <Header
+                admin={token ? true : false}
+            />
 
             <section className="container-fluid bg-primary">
                 <section className="container">

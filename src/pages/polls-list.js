@@ -3,9 +3,16 @@ import { Link } from 'react-router-dom'
 import { Header } from '../components/header';
 import { Footer } from '../components/footer';
 
-function PollsList() {
+function PollsList({ token }) {
+    token = token.slice(1, token.length - 1);
     const [polls, setPolls] = useState(false);
+
     useEffect(() => {
+        if (!token) {
+            window.location.replace('/signup')
+            return;
+          }
+          
         if (!polls) {
             (async () => {
                 try {
@@ -14,6 +21,7 @@ function PollsList() {
                         mode: 'cors', // no-cors, *cors, same-origin
                         headers: {
                             'Content-Type': 'application/json',
+                            'auth': `Bearer ${token}`
                         },
                         // body: null // body data type must match "Content-Type" header
                     });
@@ -25,11 +33,12 @@ function PollsList() {
             })();
         }
     }, [polls]);
-    console.log(polls);
 
     return (
         <>
-            <Header />
+            <Header 
+                admin={token ? true : false}
+            />
             <section className="container-fluid bg-primary">
                 <section className="container">
                     <h1 className="display-2 text-white">My Polls</h1>
