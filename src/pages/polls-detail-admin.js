@@ -57,20 +57,19 @@ function PollsDetailView({ token }) {
                         {pollDetail && <>
                             <div className="container p-5">
                                 {pollDetail.anwser.length && pollDetail.anwser.map((anwser, i) => (
-                                    <>
-                                        <div className=" border-0 m-2" key={i}>
-                                            <div className="">
-                                                <h2 className="mb-0">
-                                                    Anwser: {anwser.text}
-                                                </h2>
-                                                <p>Votes: {anwser.votes}</p>
-                                            </div>
+                                    <div className=" border-0 m-2" key={i}>
+                                        <div className="">
+                                            <h2 className="mb-0">
+                                                Anwser: {anwser.text}
+                                            </h2>
+                                            <p>Votes: {anwser.votes}</p>
                                         </div>
-                                    </>))}
+                                    </div>
+                                ))}
                             </div>
                         </>}
                         <div className="d-flex justify-content-end align-items-center">
-                            <p className="mr-3">{new Date().toDateString() === new Date(pollDetail.deadline).toDateString() ? `Poll is closed.` : `This Poll is still Active on till: ${new Date(pollDetail.deadline).toDateString()}`}</p>
+                            <p className="mr-3">{new Date().toDateString() === new Date(pollDetail.deadline).toDateString() ? `Poll is closed.` : `This Poll is Active on till: ${new Date(pollDetail.deadline).toDateString()}`}</p>
                             <p className="text-muted mr-3">|</p>
                             <p className="text-right">Last modified on: {new Date(pollDetail.deadline).toDateString()}</p>
                         </div>
