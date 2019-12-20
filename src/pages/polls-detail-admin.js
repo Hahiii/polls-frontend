@@ -46,7 +46,7 @@ function PollsDetailView({ token }) {
             />
             <section className="container-fluid bg-primary">
                 <section className="container">
-                    <h1 className="display-2 text-white">{pollDetail.questions}</h1>
+                    <h1 className="display-2 py-2 text-white">{pollDetail.questions}</h1>
                 </section>
             </section>
 
@@ -68,9 +68,30 @@ function PollsDetailView({ token }) {
                             </div>
                         </>}
                         <div className="d-flex justify-content-end align-items-center">
-                            <p className="mr-3">{new Date().toDateString() === new Date(pollDetail.deadline).toDateString() ? `Poll is closed.` : `This Poll is Active on till: ${new Date(pollDetail.deadline).toDateString()}`}</p>
-                            <p className="text-muted mr-3">|</p>
-                            <p className="text-right">Last modified on: {new Date(pollDetail.deadline).toDateString()}</p>
+                            
+                                {
+                                    new Date().toDateString() === new Date(pollDetail.deadline).toDateString() ? 
+                                    <p className="mr-3">
+                                    Poll is closed.
+                                    </p> :
+                                    <p className="mr-3">
+                                        <div className="text-muted small text-left">
+                                            This Poll is Active until:
+                                        </div>
+                                        <span>{new Date(pollDetail.deadline).toDateString()}</span>
+                                    </p>
+                                }
+                            
+                            {/* <p className="text-muted mr-3">|</p> */}
+
+                            <p className="border-left pl-3 text-right">
+                                <div className="text-muted small text-left">
+                                    Date of creation: 
+                                </div>
+                                <span>
+                                    {new Date(pollDetail.createdAt).toDateString()}
+                                </span>
+                            </p>
                         </div>
                     </div>
                 </div>

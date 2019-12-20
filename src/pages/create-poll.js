@@ -80,13 +80,13 @@ function CreatePoll({ token, loggedIn }) {
 
             <section className="container-fluid bg-primary">
                 <section className="container">
-                    <h1 className="display-2 text-white">Create a new poll</h1>
+                    <h1 className="display-2 py-2 text-white">Create a new poll</h1>
                 </section>
             </section>
 
             {!poll ?
                 <>
-                    <section className="container bg-white h-100">
+                    <section className="container bg-white">
                         <div className="row">
                             <form className="col-md-6 p-5">
                                 <div className="form-group">

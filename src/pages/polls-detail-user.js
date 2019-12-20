@@ -66,7 +66,7 @@ function PollsDetailUserView() {
 
             <section className="container-fluid bg-primary">
                 <section className="container">
-                    <h1 className="display-2 text-white">Vote</h1>
+                    <h1 className="display-2 py-2 text-white">Vote</h1>
                 </section>
             </section>
             {!notVoted ? <>

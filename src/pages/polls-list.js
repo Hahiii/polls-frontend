@@ -29,7 +29,6 @@ function PollsList({ token, loggedIn }) {
                         // body: null // body data type must match "Content-Type" header
                     });
                     const { data } = await response.json();
-                    console.log("------", data)
                     setPolls(data);
                 } catch (error) {
                     console.error('Error:', error);
@@ -50,7 +49,6 @@ function PollsList({ token, loggedIn }) {
                 },
             });
             const { data } = await response.json();
-            console.log("------", data)
             setPolls(data);
         } catch (error) {
             console.error('Error:', error);
@@ -67,11 +65,11 @@ function PollsList({ token, loggedIn }) {
                 />
                 <section className="container-fluid bg-primary">
                     <section className="container">
-                        <h1 className="display-2 text-white">My Polls</h1>
+                        <h1 className="display-2 py-2 text-white">My Polls</h1>
                     </section>
                 </section>
 
-                <section className="container h-100">
+                <section className="container flex-grow-1">
                     <div className="row">
                         {polls.length ?
                             <ul className="col-sm-12 col-md-8 my-5 list-group">
