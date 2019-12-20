@@ -70,7 +70,7 @@ function PollsDetailUserView() {
                 </section>
             </section>
             {!notVoted ? <>
-                <section className="container bg-white h-100">
+                <section className="container flex-grow-1">
                     <div className="row">
                         {pollDetail && <>
                             <div className="col-md-6 p-5">

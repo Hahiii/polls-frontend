@@ -50,7 +50,7 @@ function PollsDetailView({ token }) {
                 </section>
             </section>
 
-            <section className="container bg-white h-100">
+            <section className="container flex-grow-1">
                 <div className="row">
                     <div className="col-12">
                         {pollDetail && <>
