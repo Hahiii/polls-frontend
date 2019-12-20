@@ -41,12 +41,12 @@ function App() {
             loggedIn={userId}
           />
         )} />
-        <Route path="/polls/detail" render={() => (
+        <Route path="/polls/detail/:id" render={() => (
           <PollsDetailView
             token={token}
           />
         )} />
-        <Route path="/polls/user/detail" render={() => (
+        <Route path="/polls/user/detail/:id" render={() => (
           <PollsDetailUserView />
         )} />
       </BrowserRouter>

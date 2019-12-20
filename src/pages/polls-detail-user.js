@@ -1,5 +1,5 @@
 import React, { useRef, useEffect, useState } from 'react';
-import { Link } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 import { Header } from '../components/header';
 import { Footer } from '../components/footer';
 
@@ -9,7 +9,9 @@ function PollsDetailUserView() {
     const [notVoted, setNotVoted] = useState(false);
     const email = useRef();
     const validation = useRef();
-    const id = window.location.search.slice(1);
+    const { id } = useParams();
+
+    console.log(id);
 
     useEffect(() => {
         if (!pollDetail) {
