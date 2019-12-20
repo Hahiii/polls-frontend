@@ -2,6 +2,8 @@ import React, { useRef, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom'
 import { Header } from '../components/header';
 import { Footer } from '../components/footer';
+import linkIcon from '../images/link.png';
+import keyIcon from '../images/key.png';
 
 function CreatePoll({ token, loggedIn }) {
     token = token.slice(1, token.length - 1);
@@ -9,6 +11,7 @@ function CreatePoll({ token, loggedIn }) {
     const questionVal = useRef();
     let [answerCount, setAnswerCount] = useState(2);
     let [poll, setPoll] = useState(false);
+    let [error, setError] = useState(false);
 
     useEffect(() => {
 
@@ -58,12 +61,18 @@ function CreatePoll({ token, loggedIn }) {
                 },
                 body: JSON.stringify(dataObj)
             });
-            const { data } = await response.json()
-            console.log(".......",data)
-            setPoll(data)
-        } catch (error) {
 
-            console.error('Error:', error);
+            if (!response.ok) {
+                const { data } = await response.json();
+                setError(data.error);
+            }
+            
+            if (response.ok) {
+                const { data } = await response.json();
+                setPoll(data);
+            }
+        } catch (error) {
+            console.log('Error:', error);
         }
     });
 
@@ -91,7 +100,8 @@ function CreatePoll({ token, loggedIn }) {
                             <form className="col-md-6 p-5">
                                 <div className="form-group">
                                     <label htmlFor="questions">Question</label>
-                                    <input type="text" className="form-control" id="questions" name="questions" ref={questionVal} />
+                                    <input type="text" className="form-control" id="questions" name="questions" ref={questionVal} required />
+                                    {error.questions && <div className="text-danger"> Please choose a question.</div>}
                                 </div>
 
                                 <fieldset className="form-group">
@@ -103,7 +113,7 @@ function CreatePoll({ token, loggedIn }) {
                                                 return (
                                                     <div className="form-group" key={i} >
                                                         <label htmlFor="anwser">{i + 1}. Answer</label>
-                                                        <input type="text" className="form-control" id="anwser" name="anwser" ref={answers[i]} />
+                                                        <input type="text" className="form-control" id="anwser" name="anwser" ref={answers[i]} required />
                                                     </div>
                                                 )
                                             } else {
@@ -121,12 +131,14 @@ function CreatePoll({ token, loggedIn }) {
 
                                 <div className="form-group">
                                     <label htmlFor="validation">Validation</label>
-                                    <input type="text" className="form-control" id="validation" name="validation" ref={validationVal} />
+                                    <input type="text" className="form-control" id="validation" name="validation" ref={validationVal} required />
+                                    {error.validation && <div className="text-danger">Please choose a validation key.</div>}
                                 </div>
 
                                 <div className="form-group">
                                     <label htmlFor="deadline">Deadline</label>
-                                    <input type="date" className="form-control" id="deadline" name="deadline" ref={deadlineVal} />
+                                    <input type="date" className="form-control" id="deadline" name="deadline" ref={deadlineVal} required />
+                                    {error.deadline && <div className="text-danger">Please choose a deadline.</div>}
                                 </div>
 
                                 <div className="d-flex justify-content-end">
@@ -144,7 +156,7 @@ function CreatePoll({ token, loggedIn }) {
                         <div className="modal-dialog">
                             <div className="modal-content">
                                 <div className="modal-header">
-                                    <h5 className="modal-title">Poll sucssesful created.</h5>
+                                    <h5 className="modal-title">Poll successfully created.</h5>
                                     <button type="button" className="close">
                                         <span onClick={(e) => {
                                             e.preventDefault();
@@ -153,9 +165,21 @@ function CreatePoll({ token, loggedIn }) {
                                     </button>
                                 </div>
                                 <div className="modal-body">
-                                    <p>Share Link and Validation to voter to be able to vote</p>
-                                    <p>Poll Link: <Link to={`/polls/user/detail?${poll._id}`}>localhost:3000/polls/user/detail/{poll._id}</Link></p>
-                                    <p>Validation: {poll.validation}</p>
+
+                                    <label>Share link and validation with voter to be able to vote:</label>
+                                    <p className="text-dark">
+                                        <span class="rounded-circle border border-secondary icon mr-2">
+                                            <img src={linkIcon} />
+                                        </span>
+                                        http://localhost:3000/polls/user/detail/{poll._id}
+                                    </p>
+
+                                    <p className="text-dark">
+                                        <span class="rounded-circle border border-secondary icon mr-2">
+                                            <img src={keyIcon} />
+                                        </span>
+                                        {poll.validation}
+                                    </p>
                                 </div>
                                 <div className="modal-footer">
                                     <button type="button" className="btn btn-primary" onClick={(e) => {

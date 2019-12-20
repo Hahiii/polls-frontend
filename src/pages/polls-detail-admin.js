@@ -1,10 +1,13 @@
 import React, { useRef, useEffect, useState } from 'react';
+import { Link, useParams } from 'react-router-dom'
 import { Header } from '../components/header';
 import { Footer } from '../components/footer';
+import linkIcon from '../images/link.png';
+import keyIcon from '../images/key.png';
 
 function PollsDetailView({ token }) {
     const [pollDetail, setPollDetail] = useState(false);
-    const id = window.location.search.slice(1);
+    const { id } = useParams();
     useEffect(() => {
         if (!token) {
             window.location.replace('/signup');
@@ -54,9 +57,9 @@ function PollsDetailView({ token }) {
                 <div className="row">
                     <div className="col-12">
                         {pollDetail && <>
-                            <div className="container p-5">
+                            <div className="py-5">
                                 {pollDetail.anwser.length && pollDetail.anwser.map((anwser, i) => (
-                                    <div className=" border-0 m-2" key={i}>
+                                    <div className=" border-0 my-2" key={i}>
                                         <div className="">
                                             <h2 className="mb-0">
                                                 Anwser: {anwser.text}
@@ -67,6 +70,22 @@ function PollsDetailView({ token }) {
                                 ))}
                             </div>
                         </>}
+                        <div>
+                            <label>Share link and validation with voter to be able to vote:</label>
+                            <p className="text-dark">
+                                <span class="rounded-circle border border-secondary icon mr-2">
+                                    <img src={linkIcon} />
+                                </span>
+                                http://localhost:3000/polls/user/detail/{pollDetail._id}  
+                            </p>
+
+                            <p className="text-dark">
+                            <span class="rounded-circle border border-secondary icon mr-2">
+                                    <img src={keyIcon} />
+                                </span>
+                                {pollDetail.validation}  
+                            </p>
+                        </div>
                         <div className="d-flex justify-content-end align-items-center">
                             
                                 {
@@ -74,24 +93,24 @@ function PollsDetailView({ token }) {
                                     <p className="mr-3">
                                     Poll is closed.
                                     </p> :
-                                    <p className="mr-3">
+                                    <div className="mr-3">
                                         <div className="text-muted small text-left">
                                             This Poll is Active until:
                                         </div>
                                         <span>{new Date(pollDetail.deadline).toDateString()}</span>
-                                    </p>
+                                    </div>
                                 }
                             
                             {/* <p className="text-muted mr-3">|</p> */}
 
-                            <p className="border-left pl-3 text-right">
+                            <div className="border-left pl-3 text-right">
                                 <div className="text-muted small text-left">
                                     Date of creation: 
                                 </div>
                                 <span>
                                     {new Date(pollDetail.createdAt).toDateString()}
                                 </span>
-                            </p>
+                            </div>
                         </div>
                     </div>
                 </div>
