@@ -76,7 +76,7 @@ function PollsDetailView({ token }) {
                                 <span className="rounded-circle border border-secondary icon mr-2">
                                     <img src={linkIcon} />
                                 </span>
-                                http://localhost:3000/polls/user/detail/{pollDetail._id}  
+                                https://polls-frontend.shalanazim.now.sh/polls/user/detail/{pollDetail._id}  
                             </p>
 
                             <p className="text-dark">

@@ -171,7 +171,7 @@ function CreatePoll({ token, loggedIn }) {
                                         <span className="rounded-circle border border-secondary icon mr-2">
                                             <img src={linkIcon} />
                                         </span>
-                                        http://localhost:3000/polls/user/detail/{poll._id}
+                                        https://polls-frontend.shalanazim.now.sh/polls/user/detail/{poll._id}
                                     </p>
 
                                     <p className="text-dark">
