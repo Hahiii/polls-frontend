@@ -168,14 +168,14 @@ function CreatePoll({ token, loggedIn }) {
 
                                     <label>Share link and validation with voter to be able to vote:</label>
                                     <p className="text-dark">
-                                        <span class="rounded-circle border border-secondary icon mr-2">
+                                        <span className="rounded-circle border border-secondary icon mr-2">
                                             <img src={linkIcon} />
                                         </span>
                                         http://localhost:3000/polls/user/detail/{poll._id}
                                     </p>
 
                                     <p className="text-dark">
-                                        <span class="rounded-circle border border-secondary icon mr-2">
+                                        <span className="rounded-circle border border-secondary icon mr-2">
                                             <img src={keyIcon} />
                                         </span>
                                         {poll.validation}
