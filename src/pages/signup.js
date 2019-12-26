@@ -1,9 +1,10 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import { Link } from 'react-router-dom'
 import { Header } from '../components/header';
 import { Footer } from '../components/footer';
 
 function SignUp({ loggedIn }) {
+    let [error, setError] = useState(false);
     const firstname = useRef();
     const lastname = useRef();
     const email = useRef();
@@ -13,12 +14,18 @@ function SignUp({ loggedIn }) {
         return null;
     }
     const submitRegistration = async _ => {
-
         const dataObj = {
             firstname: firstname.current.value,
             lastname: lastname.current.value,
             email: email.current.value,
             password: password.current.value
+        }
+       
+        for (const key in dataObj) {
+            if (!dataObj[key]) {
+                setError(dataObj)
+               return;
+            }
         }
 
         try {
@@ -31,7 +38,6 @@ function SignUp({ loggedIn }) {
                 body: JSON.stringify(dataObj)
             });
             const { data } = await response.json();
-            console.log(data)
             /* Save Token on local Storage */
             localStorage.setItem('token', JSON.stringify(data.token));
             localStorage.setItem('id', JSON.stringify(data.userId));
@@ -57,20 +63,24 @@ function SignUp({ loggedIn }) {
                     <div className="row justify-content-end align-items-center">
                         <form className="col-md-6 bg-white p-5 rounded">
                             <div className="form-group">
-                                <label htmlFor="userFirstname">First Name</label>
+                                <label htmlFor="userFirstname">First Name *</label>
                                 <input type="text" className="form-control" id="userFirstname" name="firstname" ref={firstname} />
+                                {error && !error.firstname && <div className="text-danger">* This field is required.</div>}
                             </div>
                             <div className="form-group">
-                                <label htmlFor="userLastname">Last Name</label>
+                                <label htmlFor="userLastname">Last Name *</label>
                                 <input type="text" className="form-control" id="userLastname" name="lastname" ref={lastname} />
+                                {error && !error.lastname && <div className="text-danger">* This field is required.</div>}
                             </div>
                             <div className="form-group">
-                                <label htmlFor="userEmail">Email address</label>
+                                <label htmlFor="userEmail">Email address *</label>
                                 <input type="email" className="form-control" id="userEmail" name="email" ref={email} />
+                                {error && !error.email && <div className="text-danger">* This field is required.</div>}
                             </div>
                             <div className="form-group">
-                                <label htmlFor="userPassword">Password</label>
+                                <label htmlFor="userPassword">Password *</label>
                                 <input type="password" className="form-control" id="userPassword" name="password" ref={password} />
+                                {error && !error.password && <div className="text-danger">* This field is required.</div>}
                             </div>
 
                             <div className="d-flex">
