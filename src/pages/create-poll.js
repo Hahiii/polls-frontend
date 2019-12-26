@@ -52,7 +52,7 @@ function CreatePoll({ token, loggedIn }) {
                 deadline: deadlineVal.current.value,
             }
 
-            const response = await fetch('http://localhost:8080/api/poll/' + loggedIn, {
+            const response = await fetch('https://final-project-86.herokuapp.com/api/poll/' + loggedIn, {
                 method: 'POST', // *GET, POST, PUT, DELETE, etc.
                 mode: 'cors', // no-cors, *cors, same-origin
                 headers: {

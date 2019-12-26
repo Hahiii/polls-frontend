@@ -40,7 +40,7 @@ function PollsList({ token, loggedIn }) {
 
     const deletePollById = async (id) => {
         try {
-            const response = await fetch('http://localhost:8080/api/poll/delete/' + id, {
+            const response = await fetch('https://final-project-86.herokuapp.com/api/poll/delete/' + id, {
                 method: 'DELETE', // *GET, POST, PUT, DELETE, etc.
                 mode: 'cors', // no-cors, *cors, same-origin
                 headers: {
