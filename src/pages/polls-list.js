@@ -19,7 +19,7 @@ function PollsList({ token, loggedIn }) {
         if (!polls) {
             (async () => {
                 try {
-                    const response = await fetch('http://localhost:8080/api/poll/list/' + loggedIn, {
+                    const response = await fetch('https://final-project-86.herokuapp.com/api/poll/list/' + loggedIn, {
                         method: 'GET', // *GET, POST, PUT, DELETE, etc.
                         mode: 'cors', // no-cors, *cors, same-origin
                         headers: {

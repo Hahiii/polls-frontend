@@ -41,7 +41,7 @@ function PollsDetailUserView() {
         }
 
         try {
-            const response = await fetch('http://localhost:8080/api/poll/vote/' + id, {
+            const response = await fetch('https://final-project-86.herokuapp.com/api/poll/vote/' + id, {
                 method: 'POST', // *GET, POST, PUT, DELETE, etc.
                 mode: 'cors', // no-cors, *cors, same-origin
                 headers: {
