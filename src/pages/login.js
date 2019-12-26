@@ -1,9 +1,10 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import { Link } from 'react-router-dom'
 import { Header } from '../components/header';
 import { Footer } from '../components/footer';
 
 function LogIn({ loggedIn }) {
+    let [error, setError] = useState(false);
     const email = useRef();
     const password = useRef();
 
@@ -28,8 +29,12 @@ function LogIn({ loggedIn }) {
                 body: JSON.stringify(dataObj)
             });
             const { data } = await response.json();
-            
+
             /* Save Token on local Storage */
+            if (!response.ok) {
+                setError(data.error);
+                return null;
+            }
             localStorage.setItem('token', JSON.stringify(data.token));
             localStorage.setItem('id', JSON.stringify(data.userId));
             if (localStorage.getItem('id')) {
@@ -67,6 +72,7 @@ function LogIn({ loggedIn }) {
                                     <Link to="/signup" className="mx-2">Sign Up</Link>
                                 </p>
                             </div>
+                            {error && <div className="text-danger">Wrong credentials.</div>}
                             <div className="d-flex justify-content-end">
                                 <button type="button" className="btn btn-primary" onClick={(e) => {
                                     e.preventDefault();
