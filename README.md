@@ -1,24 +1,38 @@
-[Live Demo](https://polls-frontend.shalanazim.now.sh/login)
+# Poll App
 
-To login please use:
+[Checkout live demo](https://polls-frontend.shalanazim.now.sh/login)
 
-```bash
-Email address: max@mustermann.org
-Password: mustermann
-```
+<details>
+  <summary>For login credentials click here</summary>
+  <pre>
+  <code>
+    Email address: max@mustermann.org
+    Password: mustermann
+  </code>
+  </pre>
+</details>
 
-## Available Scripts
+## Setup
 
-In the project directory, you can run:
+Make sure you have node isntalled, then run `npm install`
 
-### `npm start`
+## Run locally
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+To run the project locally run `npm start`
+You can then open the project on [http://localhost:3000](http://localhost:3000) in the browser.
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+## Build
 
-### `npm run build`
+To build the project run `npm run build`
 
 Builds the app for production to the `build` folder.
+
+## Polls app preview
+
+![polls app: signup page](poll-app-signup.png)
+
+![polls app: my polls page](poll-app-my-polls.png)
+
+![polls app: vote for a poll](poll-app-vote.png)
+
+![polls app: see poll results](poll-app-results.png)
